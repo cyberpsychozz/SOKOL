@@ -31,14 +31,14 @@ video = load_video()
 
 fps = int(video.get(cv2.CAP_PROP_FPS)) or 30
 w = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
-h = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+h = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-output_path = Path(__file__).parent.parent / "results" / "result_with_yolo.avi"
+output_path = Path(__file__).parent.parent / "results" / "result_with_yolo.mp4"
 output_path.parent.mkdir(exist_ok=True)  
 
 out = cv2.VideoWriter(
     str(output_path),
-    cv2.VideoWriter_fourcc(*"MPEG"),
+    cv2.VideoWriter_fourcc(*"mp4v"),
     fps, (w, h)
 )
 
@@ -60,7 +60,7 @@ while video.isOpened():
             annotated_frame = results[0].plot()
     else:
             annotated_frame = frame.copy()  # просто копируем оригинал
-
+    # print(annotated_frame.shape[2])
     out.write(annotated_frame)
 
 video.release()
