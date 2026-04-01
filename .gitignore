@@ -1,0 +1,7 @@
+# .gitignore
+PaddleDetection/
+InsPLAD-det/
+output/
+*.pdparams
+*.rknn
+*.zip
