@@ -1,0 +1,18 @@
+# YOLO/Roboflow dataset config for SOKOL.
+# Expected layout:
+# datasets/sokol/
+#   train/images, train/labels
+#   valid/images, valid/labels
+#   test/images,  test/labels   # optional
+#
+# Change this path when your dataset finishes downloading.
+path: ../datasets/sokol
+train: train/images
+val: valid/images
+test: test/images
+
+# Replace names with the exact classes from the downloaded dataset.
+# For a first binary smoke/fire detector, keep only: [fire, smoke].
+names:
+  0: fire
+  1: smoke
