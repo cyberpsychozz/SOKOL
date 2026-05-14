@@ -2,6 +2,7 @@ from ultralytics import YOLO
 from pathlib import Path
 import cv2
 import numpy as np
+from preprocessing import CameraDenoiseConfig, CameraDenoiser
 
 def load_model(model_name: str = "Best_multiclass_with_faults_yolov11m.pt"):
     repo_root = Path(__file__).parent.parent  
@@ -26,6 +27,14 @@ def load_video(video_name: str = "video_drone.mp4"):
 # Загрузка видео и модели
 model = load_model()
 video = load_video()
+denoiser = CameraDenoiser(
+    CameraDenoiseConfig(
+        enabled=True,
+        temporal_alpha=0.15,
+        bilateral=True,
+        clahe=True,
+    )
+)
 
 # Параметры видео
 
@@ -47,6 +56,7 @@ while video.isOpened():
     ret, frame = video.read()
     if not ret:
         break
+    frame = denoiser(frame)
 
     results = model.predict(
         frame,

@@ -7,10 +7,15 @@ from PIL import Image
 import io
 import uvicorn
 import base64
+from pathlib import Path
+
+from preprocessing import CameraDenoiser
 
 app = FastAPI(title= "YOLO Object detection API")
 
-model = YOLO("/home/cyberpsychoz/RailRoad_Energy_Communications_Tracker/MVP/models/Best_multiclass_with_faults_yolov11m.pt")
+MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "Best_multiclass_with_faults_yolov11m.pt"
+model = YOLO(str(MODEL_PATH))
+denoiser = CameraDenoiser()
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
@@ -37,6 +42,7 @@ async def predict(file: UploadFile = File(...)):
     if img is None:
         return {"error": "Не удалось загрузить изображение"}
 
+    img = denoiser(img)
 
     results = model(img, conf=0.25)  
 
