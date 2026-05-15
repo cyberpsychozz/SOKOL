@@ -12,8 +12,8 @@
 Чтобы установить модуль, клонируйте репозиторий и установите необходимые зависимости:
 
 ```bash
-git clone https://github.com/yourusername/RailRoad_Energy_Communications_Tracker.git
-cd RailRoad_Energy_Communications_Tracker
+git clone https://github.com/cyberpsychozz/SOKOL.git
+cd SOKOL
 pip install -r requirements.txt
 ```
 
