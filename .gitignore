@@ -1,7 +1,9 @@
 # .gitignore
+best.pt
 PaddleDetection/
 InsPLAD-det/
 output/
 *.pdparams
 *.rknn
 *.zip
+quantization/output/
